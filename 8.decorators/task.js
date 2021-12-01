@@ -24,12 +24,14 @@ function debounceDecoratorNew(func, ms) {
   function wrapper(...args) {
     if (timer == undefined) {
       wrapper.count++
-      timer = setTimeout(func)
-    } else {   
+      timer = func(...args)
+    }
     clearTimeout(timer)
     console.log(wrapper.count)
-    return timer = setTimeout(() => func(...args, wrapper.count++), ms) 
-    } 
+    return timer = setTimeout(() => {
+      wrapper.count++;
+      func(...args)
+    }, ms);
   }
   wrapper.count = 0;
   return wrapper;
@@ -40,12 +42,14 @@ function debounceDecorator2(func, ms) {
   function wrapper(...args) {
     if (timer == undefined) {
       wrapper.count++
-      timer = setTimeout(func)
-    } else {   
+      timer = func(...args)
+    }
     clearTimeout(timer)
     console.log(wrapper.count)
-    return timer = setTimeout(() => func(...args, wrapper.count++), ms) 
-    } 
+    return timer = setTimeout(() => {
+      wrapper.count++;
+      func(...args)
+    }, ms);
   }
   wrapper.count = 0;
   return wrapper;
